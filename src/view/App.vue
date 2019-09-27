@@ -10,15 +10,16 @@ import vHead from '../components/vHead.vue';
 export default {
   name: "app",
   components:{
-      vHead
+      vHead,
   },
   data() {
-      return{
-          
-      }
+    return {};
   }
 };
 </script>
 
 <style>
+#app{
+    min-width: 1200px;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div id="vHead">
-        <p>hello123</p>
+        <p>十三水竞技场</p>
     </div>
 </template>
 
@@ -10,12 +10,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #vHead{
-    height: 20vh;
-    background: rgb(89, 167, 114);
+    height: 15vh;
+    background: rgba(0, 137, 117, 1);
+    border-bottom: 3vh #e7e7e7 solid;
+    display: flex;
+    align-items: center;
 }
 p{
+    margin-left: 55px;
+    font-size: 25px;
+    font-weight: 800;
     color: white;
 }
 </style>

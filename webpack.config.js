@@ -1,15 +1,17 @@
-const {VueLoaderPlugin} = require('vue-loader');
+const {
+    VueLoaderPlugin
+} = require('vue-loader');
 const path = require("path");
-const webpack =require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const webpack = require('webpack');
 module.exports = {
     entry: {
         main: './src/index.js'
     },
-    output:{
-        publicPath:'/dist',//必须加publicPath
-        path:__dirname+'/dist',
-        filename:'main.js'
+    output: {
+        publicPath: '/dist', //必须加publicPath
+        path: __dirname + '/dist',
+        filename: 'main.js'
     },
     devServer: {
         // 设置基本目录结构
@@ -35,9 +37,15 @@ module.exports = {
             }, {
                 test: /\.js$/, //js文件加载器
                 use: ['babel-loader'],
-            },{
+            }, {
                 test: /\.css$/, //css文件加载器
                 loaders: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
             }
         ]
     },
