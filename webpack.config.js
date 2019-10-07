@@ -11,7 +11,7 @@ module.exports = {
     output: {
         publicPath: '/dist', //必须加publicPath
         path: __dirname + '/dist',
-        filename: 'main.js'
+        filename: 'main.js',
     },
     devServer: {
         // 设置基本目录结构
