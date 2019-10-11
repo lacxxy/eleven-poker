@@ -45,6 +45,7 @@ import index from './view/index.vue';
 import login from './view/login.vue';
 import ranking from './view/ranking.vue';
 import history from './view/history.vue';
+import register from './view/register.vue'
 
 const router = new Router({
     routes: [{
@@ -72,6 +73,11 @@ const router = new Router({
             path: '/login',
             name: login,
             component: login
+        },
+        {
+          path: '/register',
+                name: 'register',
+                component: register
         }
     ],
 });

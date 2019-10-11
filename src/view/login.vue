@@ -5,6 +5,7 @@
             <input type = "text" placeholder = "用户名" v-model = "loginForm.uesrname">
             <input type = "text" placeholder = "密码" v-model = "loginForm.password">
             <button @click = "login()">确认</button>
+            <a href="#/register">注册</a>
         </div>
     </div>
 </template>
@@ -32,7 +33,7 @@ export default {
             } else {
                 axios({
                     method: 'post',
-                    url: 'http://shisanshui.rtxux.xyz/auth/login',
+                    url: 'https://api.shisanshui.rtxux.xyz/auth/register',
                     data: _this.loginForm
                 }).then(res => {
                     console.log(res.data);

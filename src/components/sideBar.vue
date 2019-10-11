@@ -1,8 +1,6 @@
 <template>
   <div id="sideBar">
-    <div class="block" v-for="item in routerData" @click="$router.push(item.to)">
-      {{item.name}}
-    </div>
+    <div class="block" v-for="item in routerData" @click="$router.push(item.to)">{{item.name}}</div>
   </div>
 </template>
 

@@ -71,11 +71,11 @@ export default {
     background-size: cover;
 }
 #content {   
-    margin: 4% auto 0;
+    margin: 2% auto;
     width: 38%;
     height: 96%;
     background: url('../assets/ranking.jpg')no-repeat;
-    background-size: 100% ;
+    background-size: 100% 95%;
 }
 #content-top {
     width: 100%;
