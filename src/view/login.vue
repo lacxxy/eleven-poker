@@ -2,8 +2,8 @@
     <div id="login">
         <div id="input-area">
             <p>登录</p>
-            <input type = "text" placeholder = "用户名" v-model = "loginForm.uesrname">
-            <input type = "text" placeholder = "密码" v-model = "loginForm.password">
+            <input type = "text" placeholder = "用户名" v-model = "username">
+            <input type = "text" placeholder = "密码" v-model = "password">
             <button @click = "login()">确认</button>
             <a href="#/register">注册</a>
         </div>
@@ -17,41 +17,36 @@ export default {
     name: "login",
     data() {
         return {
-            loginForm: {
-                uesrname: '',
-                password: ''
-            },
-            userToken: ''
+            username: '',
+            password: '',
         }
     },
     methods: {
-        // ...mapMutations(['changeLogin']),
+        // ...mapMutations(['setToken']),
         login() {
-            let _this = this;
-            if(this.uesrname === '' || this.password === '') {
+
+            if(this.username === '' || this.password === '') {
                 alert('账号或密码不能为空');
             } else {
                 axios({
                     method: 'post',
-                    url: 'https://api.shisanshui.rtxux.xyz/auth/register',
-                    data: _this.loginForm
+                    url: 'https://api.shisanshui.rtxux.xyz/auth/login',
+                    data: {
+                        'username': this.username,
+                        'password': this.password
+                    }
                 }).then(res => {
-                    console.log(res.data);
-                    _this.userToken = 'Bearer' + res.data.token;
-                    //将用户的token保存到vue中
-                    _this.changeLogin({ Authorization: _this.userToken});
-                    _this.$router.push('/battle');
+                    console.log(res.data.data.token);
+                    localStorage.Authorization = res.data.data.token;
                     alert('登陆成功');
                 }).catch(err => {
                     alert('账号或密码错误');
                     console.log(err);
                 })
+                this.username = '';
+                this.password = '';
+                // window.location.href = '#/battle'
             }
-            // axios.get('http://shisanshui.rtxux.xyz/auth/login',{'uesrname': 'test', 'password': 'test', 'X-Auth-Token':'{$$.env.X-Auth-Token}'}).then(function(res){
-            //     console.log(res)
-            // }).catch(function(err){
-            //     console.log(err)
-            // })
         }
     }
 };
@@ -110,5 +105,8 @@ input:-moz-placeholder {
 }
 input:-ms-input-placeholder {
     color: rgb(207, 207, 207);
+}
+a{
+    color: white;
 }
 </style>
