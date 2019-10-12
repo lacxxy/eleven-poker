@@ -41,7 +41,7 @@
                     <img src="../assets/last-page.jpg" alt="上一页">
                 </div>
                 <ul>
-                    <li>1</li>
+                    <li class='active'>1</li>
                     <li>2</li>
                     <li>3</li>
                     <li>4</li>
@@ -49,9 +49,6 @@
                 </ul>
                 <div id="next-page">
                     <img src="../assets/next-page.jpg" alt="下一页">
-                </div>
-                <div id="select">
-                    <select></select>
                 </div>
             </div>
         </div>
@@ -120,7 +117,10 @@ img {
     padding: 8px;
     cursor: pointer;
 }
-img,ul,select {
+img,ul {
     float: left;
+}
+.active {
+    background: white;
 }
 </style>

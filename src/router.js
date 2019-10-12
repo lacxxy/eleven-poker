@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-import battle from './view/battle.vue';
+import openGame from './view/openGame.vue';
+import battle from './view/battle.vue'
 import index from './view/index.vue';
 import login from './view/login.vue';
 import ranking from './view/ranking.vue';
@@ -14,11 +15,16 @@ const router = new Router({
             path: '/',
             name: index,
             component: index,
-            redirect: 'battle',
+            redirect: 'openGame',
             children: [{
                     path: 'battle',
                     name: 'battle',
                     component: battle
+                },
+                {
+                    path: 'openGame',
+                    name: 'openGame',
+                    component: openGame
                 },
                 {
                     path: 'ranking',

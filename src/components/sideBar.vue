@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       routerData: [
-        { name: "当前对战", to: "/battle" },
+        { name: "当前对战", to: "/opengame" },
         { name: "排名总榜", to: "/ranking" },
         { name: "历史记录", to: "/history" },
         { name: "注销", to: "/login" }

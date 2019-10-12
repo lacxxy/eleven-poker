@@ -12,12 +12,13 @@
         <div id="tail">
             <poker-area :card-data="cardType"></poker-area>
         </div>
-        <button id="play">出牌</button>
+        <button id="play" @click= "play()">出牌</button>
     </div>
 </template>
 
 <script>
 import pokerArea from "../components/pokerArea.vue";
+import Net from '../network'
 export default {
   name: "battle",
   components: {
@@ -42,6 +43,22 @@ export default {
       ],
       card: ["#3 &Q *Q", "*2 $2 *9 $9 &A", "*5 *6 *10 *K *A"]
     };
+  },
+  methods: {
+    play(){
+      Net({
+        method: "post",
+        url: "/game/submit"
+      })
+        .then(res => {
+          console.log(res.data);
+          alert("出牌成功");
+        })
+        .catch(err => {
+          alert("出牌错误");
+          console.log(err);
+        });
+    }
   }
 };
 </script>

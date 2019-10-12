@@ -22,7 +22,6 @@ export default {
         }
     },
     methods: {
-        // ...mapMutations(['setToken']),
         login() {
 
             if(this.username === '' || this.password === '') {
@@ -45,7 +44,7 @@ export default {
                 })
                 this.username = '';
                 this.password = '';
-                // window.location.href = '#/battle'
+                window.location.href = '#/openGame'
             }
         }
     }
