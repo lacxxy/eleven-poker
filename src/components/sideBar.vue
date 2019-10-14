@@ -1,10 +1,16 @@
 <template>
   <div id="sideBar">
-    <div class="block" v-for="item in routerData" @click="$router.push(item.to)">{{item.name}}</div>
+    <!-- <div class="block" v-for="item in routerData" @click="$router.push(item.to)">{{item.name}}</div> -->
+    <div class="block" @click="$router.push(routerData[0].to)">{{ routerData[0].name }}</div>
+    <div class="block" @click="$router.push(routerData[1].to)">{{ routerData[1].name }}</div>
+    <div class="block" @click="$router.push(routerData[2].to)">{{ routerData[2].name }}</div>
+    <div class="block" @click="logout()">{{ routerData[3].name }}</div>
   </div>
 </template>
 
 <script>
+import { METHODS } from "http";
+import Net from "../network";
 export default {
   name: "sideBar",
   data() {
@@ -16,6 +22,27 @@ export default {
         { name: "注销", to: "/login" }
       ]
     };
+  },
+  methods: {
+    logout() {
+      if (!localStorage.Authorization) {
+        alert("未登录");
+        window.location.href = "#/login";
+        return;
+      }
+      Net({
+        method: "post",
+        url: "/auth/logout"
+      })
+        .then(res => {
+          alert("注销成功");
+          window.location.href = "#/login";
+        })
+        .catch(err => {
+          alert("注销失败");
+          console.log(err.data);
+        });
+    }
   }
 };
 </script>

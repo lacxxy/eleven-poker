@@ -18,18 +18,13 @@
       </div>
       <div id="content-bottom">
         <div class="last-page">
-          <img src="../assets/last-page.jpg" alt="上一页" @click= "lastPage()" />
+          <img src="../assets/last-page.jpg" alt="上一页" @click="lastPage()" />
         </div>
         <ul id="page">
-          <li class='active'>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>...</li>
+          <li v-for="(page,index) in pages" @click="jump(index)" ref="n">{{ page }}</li>
         </ul>
         <div id="next-page">
-          <img src="../assets/next-page.jpg" alt="下一页" @click= "nextPage()" />
+          <img src="../assets/next-page.jpg" alt="下一页" @click="nextPage()" />
         </div>
       </div>
     </div>
@@ -43,17 +38,64 @@ export default {
   name: "history",
   data() {
     return {
+      pages: [1, 2, 3, 4, 5],
       items: [],
       page: 1
     };
   },
   methods: {
+    jump(index) {
+      for (let i = 0; i < 5; i++) {
+        this.$refs.n[i].style.background = "";
+      }
+      this.$refs.n[index].style.background = "white";
+      if(this.page % 5 ===0){
+        this.page = this.page - (4 - index)
+      }
+      else if(this.page % 5 - 1 > index ) {
+        this.page = this.page - (this.page % 5 - 1 - index)
+      }
+      else {
+        this.page = this.page + (index - this.page % 5 + 1)
+      }
+      Net({
+        method: "get",
+        url: "/history",
+        params: {
+          player_id: 1,
+          limit: 7,
+          page: this.page
+        }
+      })
+        .then(res => {
+          this.items = res.data;
+          console.log(this.items);
+          alert("查询成功");
+        })
+        .catch(err => {
+          alert("查询错误");
+          console.log(err);
+        });
+      console.log(this.page);
+    },
     lastPage() {
-      if (this.page == "1") {
+      if (this.page == 1) {
         alert("已经是第一页了");
         return;
+      } else if ((this.page-1) % 5 === 0) {
+        for (let i = 0; i < 5; i++) {
+          this.$refs.n[i].innerHTML = this.page - 5 + i;
+        }
       }
       this.page--;
+      for (let i = 0; i < 5; i++) {
+        this.$refs.n[i].style.background = "";
+      }
+      if (this.page % 5 === 0) {
+        this.$refs.n[4].style.background = "white";
+      } else {
+        this.$refs.n[(this.page % 5) - 1].style.background = "white";
+      }
       console.log(this.page);
       Net({
         method: "get",
@@ -65,8 +107,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(res.data);
-          this.items = res.data.data;
+          this.items = res.data;
           console.log(this.items);
           alert("查询成功");
         })
@@ -76,6 +117,17 @@ export default {
         });
     },
     nextPage() {
+      for (let i = 0; i < 5; i++) {
+        this.$refs.n[i].style.background = "";
+      }
+      if (this.page % 5 === 0) {
+        this.$refs.n[0].style.background = "white";
+        for (let i = 0; i < 5; i++) {
+          this.$refs.n[i].innerHTML = this.page + i + 1;
+        }
+      } else {
+        this.$refs.n[(this.page % 5)].style.background = "white";
+      }
       this.page++;
       console.log(this.page);
       Net({
@@ -88,8 +140,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(res.data);
-          this.items = res.data.data;
+          this.items = res.data;
           console.log(this.items);
           alert("查询成功");
         })
@@ -99,7 +150,7 @@ export default {
         });
     }
   },
-  created() {
+  mounted() {
     Net({
       method: "get",
       url: "/history",
@@ -110,15 +161,17 @@ export default {
       }
     })
       .then(res => {
-        console.log(res.data);
-        this.items = res.data.data;
+        this.items = res.data;
         console.log(this.items);
         alert("查询成功");
       })
       .catch(err => {
-        alert("查询错误");
-        console.log(err);
+        if (localStorage.Authorization != "") {
+          alert("查询错误");
+          console.log(err);
+        }
       });
+    this.$refs.n[0].style.background = "white";
   }
 };
 </script>
@@ -173,6 +226,7 @@ td {
   color: #333333;
   line-height: 12px;
   cursor: pointer;
+  padding: 0 2px;
 }
 img {
   width: 8px;
@@ -183,8 +237,5 @@ img {
 img,
 #page {
   float: left;
-}
-.active {
-    background: #ffffff;
 }
 </style>

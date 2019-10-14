@@ -10,7 +10,7 @@
         </div>
 
         <div id="tail">
-            <poker-area :card-data="cardType"></poker-area>
+            <poker-area :card-data="myCardType"></poker-area>
         </div>
         <button id="play" @click= "play()">出牌</button>
     </div>
@@ -27,28 +27,41 @@ export default {
   data() {
     return {
       cardType: [
-        "heart_12",
         "back",
-        "heart_12",
-        "heart_12",
-        "heart_12",
-        "club_2",
-        "club_2",
-        "club_2",
-        "club_2",
         "back",
-        "club_2",
-        "club_2",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
+        "back",
         "back",
       ],
-      card: ["#3 &Q *Q", "*2 $2 *9 $9 &A", "*5 *6 *10 *K *A"]
-    };
+      myCardType:[],
+      card: [],
+      id: 0
+    }
   },
   methods: {
     play(){
+      this.card = this.card.split(' ')
+      this.myCardType = this.card
+      var card1 = this.card[0] + ' ' + this.card[1] + ' ' + this.card[2]
+      var card2 = this.card[3] + ' ' + this.card[4] + ' ' + this.card[5] + ' ' + this.card[6] + ' ' + this.card[7]
+      var card3 = this.card[8] + ' ' + this.card[9] + ' ' + this.card[10] + ' ' + this.card[11] + ' ' + this.card[12]
+      this.card = [card1,card2,card3]
+      console.log(this.myCardType)
       Net({
         method: "post",
-        url: "/game/submit"
+        url: "/game/submit",
+        data: {
+          'id': this.id,
+          'card': this.card
+        }
       })
         .then(res => {
           console.log(res.data);
@@ -58,8 +71,17 @@ export default {
           alert("出牌错误");
           console.log(err);
         });
+    },
+    getCard(){
+      this.card = this.$route.params.card
+      this.id = this.$route.params.id
+      console.log(this.id)
+      console.log(this.card)
     }
-  }
+  },
+  created() {
+    this.getCard()
+  },
 };
 </script>
 

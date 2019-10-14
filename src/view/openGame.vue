@@ -1,11 +1,11 @@
 <template>
   <div id="opengame">
-    <button id="open" @click= "open()">开启或进入战局</button>
+    <button id="open" @click="open()">开启或进入战局</button>
   </div>
 </template>
 
 <script>
-import Net from '../network'
+import Net from "../network";
 export default {
   name: "openGame",
   methods: {
@@ -17,12 +17,18 @@ export default {
         .then(res => {
           console.log(res.data);
           alert("开启或加入战局成功");
+          this.$router.push({
+            name: 'battle',
+            params: res.data
+          })
+          window.location.href = "#/battle";
         })
         .catch(err => {
-          alert("error");
-          console.log(err);
+          if (localStorage.Authorization) {
+            alert("开启或加入战局错误");
+            console.log(err);
+          }
         });
-        window.location.href = '#/battle'
     }
   }
 };

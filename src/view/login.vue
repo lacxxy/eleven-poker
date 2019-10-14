@@ -37,7 +37,7 @@ export default {
                 }).then(res => {
                     console.log(res.data.data.token);
                     localStorage.Authorization = res.data.data.token;
-                    alert('登陆成功');
+                    alert('登录成功');
                 }).catch(err => {
                     alert('账号或密码错误');
                     console.log(err);
