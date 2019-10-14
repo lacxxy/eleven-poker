@@ -16,9 +16,12 @@ Net.interceptors.request.use(function (config) {
 })
 // 添加响应拦截器
 Net.interceptors.response.use(function (response) {
-  // console.log(response)
-  // 尝试在此处判断ErrorCode
-  const code = response.data.data.status
+  console.log(response.status)
+  return response.data;
+}, function (error) {
+  console.log(error.response.status)
+  console.log(typeof(error))
+  const code = error.response.status
   if (code) {
     if (code === 403) {
       localStorage.setItem('Authorization', '')
@@ -28,8 +31,6 @@ Net.interceptors.response.use(function (response) {
     console.log(code)
     return Promise.reject(response)
   }
-  return response.data;
-}, function (error) {
   if (error.toString().includes('timeout')) {
     alert('网络超时，请稍后再试。')
   }

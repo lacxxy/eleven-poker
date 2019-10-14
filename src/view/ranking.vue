@@ -5,13 +5,13 @@
       <div id="content-list">
         <table>
           <tr>
-            <th>牌局ID</th>
             <th>用户</th>
+            <th>用户ID</th>
             <th>分数</th>
           </tr>
           <tr v-for="item in items">
-            <td>{{ item.id }}</td>
-            <td>031702637</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.player_id }}</td>
             <td>{{ item.score }}</td>
           </tr>
         </table>
@@ -32,13 +32,14 @@
 </template>
 
 <script>
-import Net from "../network";
+import axios from "axios";
 import { request } from "http";
 export default {
   name: "ranking",
   data() {
     return {
       pages: [1, 2, 3, 4, 5],
+      rank: [],
       items: [],
       page: 1
     };
@@ -58,20 +59,9 @@ export default {
       else {
         this.page = this.page + (index - this.page % 5 + 1)
       }
-      Net({
-        method: "get",
-        url: "/rank",
-      })
-        .then(res => {
-          this.items = res.data;
-          console.log(this.items);
-          alert("查询成功");
-        })
-        .catch(err => {
-          alert("查询错误");
-          console.log(err);
-        });
+      this.items = this.rank.slice((this.page-1)*7,this.page*7);
       console.log(this.page);
+      console.log(this.items)
     },
     lastPage() {
       if (this.page == 1) {
@@ -92,19 +82,8 @@ export default {
         this.$refs.n[(this.page % 5) - 1].style.background = "white";
       }
       console.log(this.page);
-      Net({
-        method: "get",
-        url: "/rank",
-      })
-        .then(res => {
-          this.items = res.data;
-          console.log(this.items);
-          alert("查询成功");
-        })
-        .catch(err => {
-          alert("查询错误");
-          console.log(err);
-        });
+      this.items = this.rank.slice((this.page-1)*7,this.page*7);
+      console.log(this.items)
     },
     nextPage() {
       for (let i = 0; i < 5; i++) {
@@ -120,30 +99,20 @@ export default {
       }
       this.page++;
       console.log(this.page);
-      Net({
-        method: "get",
-        url: "/rank",
-      })
-        .then(res => {
-          this.items = res.data;
-          console.log(this.items);
-          alert("查询成功");
-        })
-        .catch(err => {
-          alert("查询错误");
-          console.log(err);
-        });
+      this.items = this.rank.slice((this.page-1)*7,this.page*7);
+      console.log(this.items)
     }
   },
   mounted() {
-    Net({
+    axios({
       method: "get",
-      url: "/rank",
+      url: "https://api.shisanshui.rtxux.xyz/rank",
     })
       .then(res => {
-        this.items = res.data;
+        this.rank = res.data;
+        this.items = this.rank.slice(this.page-1,this.page+6);
         console.log(this.items);
-        alert("查询成功");
+        // alert("查询成功");
       })
       .catch(err => {
         if (localStorage.Authorization != "") {

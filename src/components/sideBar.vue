@@ -30,7 +30,8 @@ export default {
         window.location.href = "#/login";
         return;
       }
-      Net({
+      else{
+        Net({
         method: "post",
         url: "/auth/logout"
       })
@@ -42,6 +43,8 @@ export default {
           alert("注销失败");
           console.log(err.data);
         });
+        localStorage.Authorization = ''
+      }
     }
   }
 };

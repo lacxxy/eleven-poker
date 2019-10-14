@@ -62,15 +62,15 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 1,
+          player_id: 80,
           limit: 7,
-          page: this.page
+          page: this.page - 1
         }
       })
         .then(res => {
           this.items = res.data;
           console.log(this.items);
-          alert("查询成功");
+          // alert("查询成功");
         })
         .catch(err => {
           alert("查询错误");
@@ -101,15 +101,15 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 1,
+          player_id: 80,
           limit: 7,
-          page: this.page
+          page: this.page - 1
         }
       })
         .then(res => {
           this.items = res.data;
           console.log(this.items);
-          alert("查询成功");
+          // alert("查询成功");
         })
         .catch(err => {
           alert("查询错误");
@@ -134,15 +134,15 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 1,
+          player_id: 80,
           limit: 7,
-          page: this.page
+          page: this.page - 1
         }
       })
         .then(res => {
           this.items = res.data;
           console.log(this.items);
-          alert("查询成功");
+          // alert("查询成功");
         })
         .catch(err => {
           alert("查询错误");
@@ -155,15 +155,15 @@ export default {
       method: "get",
       url: "/history",
       params: {
-        player_id: 1,
+        player_id: 80,
         limit: 7,
-        page: this.page
+        page: this.page - 1
       }
     })
       .then(res => {
         this.items = res.data;
         console.log(this.items);
-        alert("查询成功");
+        // alert("查询成功");
       })
       .catch(err => {
         if (localStorage.Authorization != "") {

@@ -48,13 +48,6 @@ export default {
   },
   methods: {
     play(){
-      this.card = this.card.split(' ')
-      this.myCardType = this.card
-      var card1 = this.card[0] + ' ' + this.card[1] + ' ' + this.card[2]
-      var card2 = this.card[3] + ' ' + this.card[4] + ' ' + this.card[5] + ' ' + this.card[6] + ' ' + this.card[7]
-      var card3 = this.card[8] + ' ' + this.card[9] + ' ' + this.card[10] + ' ' + this.card[11] + ' ' + this.card[12]
-      this.card = [card1,card2,card3]
-      console.log(this.myCardType)
       Net({
         method: "post",
         url: "/game/submit",
@@ -65,11 +58,13 @@ export default {
       })
         .then(res => {
           console.log(res.data);
-          alert("出牌成功");
+          alert("已出牌");
+          window.location.href = '#/openGame'
         })
         .catch(err => {
           alert("出牌错误");
           console.log(err);
+          window.location.href = '#/openGame'
         });
     },
     getCard(){
@@ -77,6 +72,27 @@ export default {
       this.id = this.$route.params.id
       console.log(this.id)
       console.log(this.card)
+      this.card = this.card.split(' ')
+      this.myCardType = this.card
+      var card1 = this.card[0] + ' ' + this.card[1] + ' ' + this.card[2]
+      var card2 = this.card[3] + ' ' + this.card[4] + ' ' + this.card[5] + ' ' + this.card[6] + ' ' + this.card[7]
+      var card3 = this.card[8] + ' ' + this.card[9] + ' ' + this.card[10] + ' ' + this.card[11] + ' ' + this.card[12]
+      this.card = [card1,card2,card3]
+      for(let i=0; i<13; i++) {
+        if(this.myCardType[i][0] === '*') {
+          this.myCardType[i] ='club_' + this.myCardType[i].slice(1)
+        }
+        if(this.myCardType[i][0] === '&') {
+          this.myCardType[i] ='heart_' + this.myCardType[i].slice(1)
+        }
+        if(this.myCardType[i][0] === '$') {
+          this.myCardType[i] ='spade_' + this.myCardType[i].slice(1)
+        }
+        if(this.myCardType[i][0] === '#') {
+          this.myCardType[i] ='diamond_' + this.myCardType[i].slice(1)
+        }
+      }
+      console.log(this.myCardType)
     }
   },
   created() {

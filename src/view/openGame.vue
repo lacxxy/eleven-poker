@@ -16,7 +16,7 @@ export default {
       })
         .then(res => {
           console.log(res.data);
-          alert("开启或加入战局成功");
+          // alert("开启或加入战局成功");
           this.$router.push({
             name: 'battle',
             params: res.data
