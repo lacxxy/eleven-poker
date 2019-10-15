@@ -9,7 +9,7 @@ Net.interceptors.request.use(function (config) {
   if (localStorage.Authorization) {
     config.headers['X-Auth-Token'] = localStorage.Authorization
   }
-  // console.log(config)
+  console.log(config)
   return config;
 }, function (error) {
   return Promise.reject(error);
@@ -19,8 +19,6 @@ Net.interceptors.response.use(function (response) {
   console.log(response.status)
   return response.data;
 }, function (error) {
-  console.log(error.response.status)
-  console.log(typeof(error))
   const code = error.response.status
   if (code) {
     if (code === 403) {

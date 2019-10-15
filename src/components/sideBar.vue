@@ -4,7 +4,8 @@
     <div class="block" @click="$router.push(routerData[0].to)">{{ routerData[0].name }}</div>
     <div class="block" @click="$router.push(routerData[1].to)">{{ routerData[1].name }}</div>
     <div class="block" @click="$router.push(routerData[2].to)">{{ routerData[2].name }}</div>
-    <div class="block" @click="logout()">{{ routerData[3].name }}</div>
+    <div class="block" @click="$router.push(routerData[3].to)">{{ routerData[3].name }}</div>
+    <div class="block" @click="logout()">{{ routerData[4].name }}</div>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ export default {
         { name: "当前对战", to: "/opengame" },
         { name: "排名总榜", to: "/ranking" },
         { name: "历史记录", to: "/history" },
+        { name: "查询历史战局详情", to: "/search"},
         { name: "注销", to: "/login" }
       ]
     };
@@ -44,6 +46,8 @@ export default {
           console.log(err.data);
         });
         localStorage.Authorization = ''
+        localStorage.username = ''
+        localStorage.player_id = ''
       }
     }
   }

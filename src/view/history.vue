@@ -11,7 +11,7 @@
           </tr>
           <tr v-for="item in items">
             <td>{{ item.id }}</td>
-            <td>031702637</td>
+            <td>{{ username }}</td>
             <td>{{ item.score }}</td>
           </tr>
         </table>
@@ -40,7 +40,9 @@ export default {
     return {
       pages: [1, 2, 3, 4, 5],
       items: [],
-      page: 1
+      page: 1,
+      username: '',
+      player_id: ''
     };
   },
   methods: {
@@ -62,7 +64,7 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 80,
+          player_id: this.player_id,
           limit: 7,
           page: this.page - 1
         }
@@ -101,7 +103,7 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 80,
+          player_id: this.player_id,
           limit: 7,
           page: this.page - 1
         }
@@ -134,7 +136,7 @@ export default {
         method: "get",
         url: "/history",
         params: {
-          player_id: 80,
+          player_id: this.player_id,
           limit: 7,
           page: this.page - 1
         }
@@ -151,18 +153,22 @@ export default {
     }
   },
   mounted() {
+    this.player_id = localStorage.player_id
     Net({
       method: "get",
       url: "/history",
       params: {
-        player_id: 80,
+        player_id: this.player_id,
         limit: 7,
         page: this.page - 1
       }
     })
       .then(res => {
         this.items = res.data;
-        console.log(this.items);
+        console.log(res);
+        if(res.data.length === 0){
+          alert('无历史记录！')
+        }
         // alert("查询成功");
       })
       .catch(err => {
@@ -172,6 +178,7 @@ export default {
         }
       });
     this.$refs.n[0].style.background = "white";
+    this.username = localStorage.username
   }
 };
 </script>

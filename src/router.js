@@ -8,7 +8,8 @@ import index from './view/index.vue';
 import login from './view/login.vue';
 import ranking from './view/ranking.vue';
 import history from './view/history.vue';
-import register from './view/register.vue'
+import register from './view/register.vue';
+import search from './view/search.vue'
 
 const router = new Router({
     routes: [{
@@ -35,13 +36,18 @@ const router = new Router({
                     path: 'history',
                     name: 'history',
                     component: history
+                },
+                {
+                    path: 'search',
+                    name: 'search',
+                    component: search
                 }
             ]
         },
         {
             path: '/login',
             name: login,
-            component: login
+            component: login,
         },
         {
             path: '/register',

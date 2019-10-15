@@ -24,7 +24,7 @@ export default {
       require: true,
       type: Array
     }
-  },
+  }
 };
 </script>
 

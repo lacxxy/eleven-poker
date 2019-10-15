@@ -21,7 +21,7 @@ export default {
             name: 'battle',
             params: res.data
           })
-          window.location.href = "#/battle";
+          // window.location.href = "#/battle";
         })
         .catch(err => {
           if (localStorage.Authorization) {
