@@ -134,7 +134,7 @@ export default {
 #content {
   margin: 2% auto;
   width: 38%;
-  height: 96%;
+  height: 90%;
   background: url("../assets/ranking.jpg") no-repeat;
   background-size: 100% 95%;
 }
@@ -161,12 +161,13 @@ tr {
 th,
 td {
   width: 33.33%;
+  overflow: hidden;
+  text-align: center
 }
-td {
-  padding-left: 12%;
-}
+
 #content-bottom {
-  padding: 10% 34%;
+  display: flex;
+  justify-content: center;
 }
 #page li {
   display: inline;
@@ -182,9 +183,5 @@ img {
   height: 8px;
   padding: 8px;
   cursor: pointer;
-}
-img,
-#page {
-  float: left;
 }
 </style>

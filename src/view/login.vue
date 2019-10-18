@@ -3,7 +3,7 @@
     <div id="input-area">
       <p>登录</p>
       <input type="text" placeholder="用户名" v-model="username" />
-      <input type="text" placeholder="密码" v-model="password" />
+      <input type="password" placeholder="密码" v-model="password" />
       <button @click="login()">确认</button>
       <a href="#/register">注册</a>
     </div>
@@ -59,14 +59,14 @@ export default {
 #login {
   background: url("../assets/background.jpg") no-repeat;
   background-size: cover;
-  height: 82vh;
+  height: calc(100vh - 170px);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #input-area {
   width: 23%;
-  height: 40vh;
+  height: 300px;
   display: flex;
   flex-direction: column;
   text-align: center;

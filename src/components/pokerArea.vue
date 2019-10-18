@@ -1,13 +1,13 @@
 <template>
     <div class="pokerArea">
         <div class="item">
-            <poker v-for="item in cardData.slice(0,3)" :cardType="item"></poker>
+            <poker v-for="(item,index) in cardData.slice(0,3)" :key="index" :cardType="item"></poker>
         </div>
         <div class="item">
-            <poker v-for="item in cardData.slice(3,8)" :cardType="item"></poker>
+            <poker v-for="(item,index) in cardData.slice(3,8)"  :key="index":cardType="item"></poker>
         </div>
         <div class="item">
-            <poker v-for="item in cardData.slice(8,13)" :cardType="item"></poker>
+            <poker v-for="(item,index) in cardData.slice(8,13)" :key="index" :cardType="item"></poker>
         </div>
     </div>
 </template>

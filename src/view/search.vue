@@ -161,9 +161,11 @@ export default {
 <style scoped>
 #search {
   flex: 1;
+  height: calc(100vh - 190px);
   background: url("../assets/background.jpg") no-repeat;
   background-size: cover;
   position: relative;
+  padding: 10px;
 }
 #head {
   display: flex;
@@ -171,14 +173,14 @@ export default {
   justify-content: center;
 }
 #mid {
-  width: 100%;
+  width: calc(100% - 20px);
   position: absolute;
   top: 25%;
   display: flex;
   justify-content: space-between;
 }
 #tail {
-  width: 100%;
+  width: calc(100% - 20px);
   display: flex;
   justify-content: center;
   position: absolute;
@@ -188,21 +190,22 @@ export default {
   width: 18%;
 }
 input {
-  width: 10%;
-  height: 43px;
+  border: 0;
+  width: 15%;
+  height: 38px;
   position: absolute;
   bottom: 1%;
-  left: 34.55%;
+  left: 37%;
   font-size: 15px;
   border-radius: 5px;
 }
 #play {
   width: 10%;
-  height: 43px;
+  height: 38px;
   background: rgba(64, 158, 255, 1);
   position: absolute;
   bottom: 1%;
-  left: 45%;
+  left: 55%;
   color: white;
   font-size: 20px;
   cursor: pointer;

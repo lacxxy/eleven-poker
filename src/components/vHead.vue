@@ -12,9 +12,9 @@ export default {
 
 <style scoped>
 #vHead{
-    height: 15vh;
+    height: 150px;
     background: rgba(0, 137, 117, 1);
-    border-bottom: 3vh #e7e7e7 solid;
+    border-bottom: 20px #e7e7e7 solid;
     display: flex;
     align-items: center;
 }
