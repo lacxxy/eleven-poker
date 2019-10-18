@@ -21,7 +21,7 @@ Net.interceptors.response.use(function (response) {
 }, function (error) {
   const code = error.response.status
   if (code) {
-    if (code === 403) {
+    if (code === 401) {
       localStorage.setItem('Authorization', '')
       alert('请先登录！')
       window.location.href = '#/login'
