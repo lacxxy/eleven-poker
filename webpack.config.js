@@ -9,7 +9,7 @@ module.exports = {
         main: './src/index.js'
     },
     output: {
-        path:path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'main.js',
     },
     devServer: {
@@ -21,7 +21,7 @@ module.exports = {
         compress: true,
         // 配置服务端口号
         port: 8080,
-        hot:true,
+        hot: true,
     },
     module: {
         rules: [{
@@ -54,7 +54,7 @@ module.exports = {
         new VueLoaderPlugin(),
         new htmlWebpackPlugin({
             filename: 'index.html',
-            template: path.resolve(__dirname, 'index.html'), 
+            template: path.resolve(__dirname, 'index.html'),
         }),
     ]
 };
